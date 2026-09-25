@@ -63,7 +63,11 @@ export function WindowManagerProvider({ children }: { children: React.ReactNode 
       if (saved) {
         const parsed = JSON.parse(saved);
         const validWindows = parsed.filter((w: WindowState) => ["aesthetic", "display", "login", "folder", "music"].includes(w.componentType));
-        const unfocused = validWindows.map((w: WindowState) => ({ ...w, isFocused: false }));
+        const unfocused = validWindows.map((w: WindowState) => ({
+          ...w,
+          y: Math.max(28, w.y ?? 28),
+          isFocused: false,
+        }));
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setWindows(unfocused);
 

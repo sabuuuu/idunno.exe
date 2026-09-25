@@ -18,8 +18,8 @@ export function Window({ window: win, children }: { window: WindowState; childre
       const newX = e.clientX - dragOffset.x;
       let newY = e.clientY - dragOffset.y;
 
-      // Bounds checking (prevent window from getting completely lost)
-      newY = Math.max(0, newY);
+      // Bounds checking (prevent window from getting completely lost under topbar)
+      newY = Math.max(28, newY);
 
       updateWindowPosition(win.id, newX, newY);
     };
@@ -67,12 +67,17 @@ export function Window({ window: win, children }: { window: WindowState; childre
   if (win.isMinimized) return null;
 
   const style: React.CSSProperties = win.isMaximized
-    ? { top: 0, left: 0, width: "100%", height: "calc(100% - 44px)", zIndex: win.zIndex } // space for taskbar
+    ? { top: 28, left: 0, width: "100%", height: "calc(100% - 72px)", zIndex: win.zIndex } // space for topbar (28px) and taskbar (44px)
     : { top: win.y, left: win.x, width: win.width, height: win.height, zIndex: win.zIndex };
 
   const CHROME_ACTIONS = [
     { label: "Minimise", glyph: "—", fontSize: "10px", onClick: () => minimizeWindow(win.id) },
-    { label: "Maximise", glyph: "□", fontSize: "9px", onClick: () => toggleMaximize(win.id) },
+    {
+      label: win.isMaximized ? "Restore" : "Maximise",
+      glyph: win.isMaximized ? "❐" : "□",
+      fontSize: "9px",
+      onClick: () => toggleMaximize(win.id),
+    },
     { label: "Close", glyph: "✕", fontSize: "9px", onClick: () => closeWindow(win.id) },
   ];
 
@@ -96,6 +101,7 @@ export function Window({ window: win, children }: { window: WindowState; childre
           background: win.isFocused ? "linear-gradient(to right, var(--vapor-rose-dark), var(--vapor-rose))" : undefined,
           boxShadow: "var(--shadow-out)",
         }}
+        onDoubleClick={() => toggleMaximize(win.id)}
         onMouseDown={(e) => {
           if (win.isMaximized) return; // Don't drag if maximized
           setIsDragging(true);
@@ -123,6 +129,7 @@ export function Window({ window: win, children }: { window: WindowState; childre
             <Button
               key={label}
               aria-label={label}
+              title={label}
               onClick={onClick}
               variant="vapor"
               className={`w-4 h-4 p-0 border border-vapor-dark bg-vapor-muted text-vapor-dark font-mono leading-none flex items-center justify-center shadow-win98-out active:shadow-win98-active cursor-pointer ${
