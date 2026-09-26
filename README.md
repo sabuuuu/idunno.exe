@@ -21,7 +21,7 @@ Built on **TanStack Start** (React 19 full-stack SSR), **Tailwind CSS v4**, **Dr
 
 | **Home & Questionnaire Flow (`QUEST.EXE`)** | **Recommendation Result & Pitch (`MATCH.DAT`)** |
 |:---:|:---:|
-| [![Home Screen](docs/screenshots/idunno-ecru.vercel.app-ask.png)](docs/screenshots/idunno-ecru.vercel.app-ask.png) | [![Result Screen](docs/screenshots/idunno-ecru.vercel.app-result-56f12bb3-01aa-4116-bf97-f0f01.png)](docs/screenshots/idunno-ecru.vercel.app-result-56f12bb3-01aa-4116-bf97-f0f01.png) |
+| [![Home Screen](docs/screenshots/idunno-ecru.vercel.app-askkk.png) | [![Result Screen](docs/screenshots/idunno-ecru.vercel.app-result-56f12bb3-01aa-4116-bf97-f0f01.png)](docs/screenshots/idunno-ecru.vercel.app-result-56f12bb3-01aa-4116-bf97-f0f01.png) |
 | *5-question vibe questionnaire on the retro desktop* | *Bespoke recommendation with full metadata and "Convince Me" pitch* |
 
 ---
